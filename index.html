@@ -3,23 +3,43 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Evento en Vivo</title>
-    <style>
-        /* Añade tus estilos CSS aquí */
-        .live-stream {
-            width: 100%;
-            height: 500px;
-            /* Ajusta según necesidad */
-        }
-    </style>
+    <title>Eventos Deportivos en Vivo</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <header>
+        <h1>Eventos Deportivos en Vivo</h1>
+    </header>
+    <main>
+        <div id="event-list">
+            <!-- Los eventos se cargarán aquí mediante JavaScript -->
+        </div>
+    </main>
+    <footer>
+        Actualizado a las <span id="last-updated-time"></span>.
+    </footer>
+    <script src="script.js"></script>
 
     <div class="live-stream">
-        <iframe allowfullscreen="true" scrolling="no" src="https://tucanaldeportivo.com/liga1maxpe.php" allow="encrypted-media" width="100%" height="100%" frameborder="0"></iframe>
+        <iframe allowfullscreen="true" scrolling="no" src="https://tucanaldeportivo.com/liga1maxpe.php"
+            allow="encrypted-media" width="300" height="300" frameborder="0"></iframe>
     </div>
+    <div class="telegram-channel">
+        <p>Únete a nuestro Canal de Telegram donde tambien estaremos transmitiendo el partido</p>
+        <img src="https://i.ibb.co/Br5mb74/qrcode.png" alt="Código QR para unirse a Telegram">
 
+    </div>
+    <div class="qr-container">
+        <p>Apoyanos, cualquier yapeo o plineo es bienvenido: <span class="numero-destacado">912749193</span></p>
+        <img src="https://i.ibb.co/2563VLT/qr-bim.jpg" alt="qr-bim">
+
+    </div>
+    <script>
+        window.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        }, false);
+    </script>
 </body>
 
 </html>
