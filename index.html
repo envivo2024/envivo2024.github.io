@@ -1,45 +1,58 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Eventos Deportivos en Vivo</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <header>
-        <h1>Eventos Deportivos en Vivo</h1>
-    </header>
-    <main>
-        <div id="event-list">
-            <!-- Los eventos se cargarán aquí mediante JavaScript -->
-        </div>
-    </main>
-    <footer>
-        Actualizado a las <span id="last-updated-time"></span>.
-    </footer>
-    <script src="script.js"></script>
-
-    <div class="live-stream">
-        <iframe allowfullscreen="true" scrolling="no" src="https://tucanaldeportivo.com/liga1maxpe.php"
-            allow="encrypted-media" width="300" height="300" frameborder="0"></iframe>
-    </div>
-    <div class="telegram-channel">
-        <p>Únete a nuestro Canal de Telegram donde tambien estaremos transmitiendo el partido</p>
-        <img src="https://i.ibb.co/Br5mb74/qrcode.png" alt="Código QR para unirse a Telegram">
-
-    </div>
-    <div class="qr-container">
-        <p>Apoyanos, cualquier yapeo o plineo es bienvenido: <span class="numero-destacado">912749193</span></p>
-        <img src="https://i.ibb.co/2563VLT/qr-bim.jpg" alt="qr-bim">
-
-    </div>
+    <title>Valores de Sensores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
     <script>
-        window.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        }, false);
-    </script>
-</body>
+        function obtenerDatos() {
+            fetch('https://estadodeswitches.000webhostapp.com/obtener_ultimo_dato.php')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('luz').innerText = data.luz + '%';
+                    document.getElementById('humedad_suelo').innerText = data.humedad_suelo + '%';
+                    document.getElementById('temperatura').innerText = data.temperatura + ' °C';
+                    document.getElementById('humedad').innerText = data.humedad + '%';
+                    document.getElementById('estado_motor').innerText = data.estado_motor ? 'Encendido' : 'Apagado';
+                    document.getElementById('fecha_hora').innerText = data.fecha_hora;
+                })
+                .catch(error => console.error('Error al obtener los datos:', error));
+        }
 
+        setInterval(obtenerDatos, 5000); // Actualiza los datos cada 5 segundos
+        window.onload = obtenerDatos; // Obtén los datos al cargar la página
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Últimos Valores de Sensores</h1>
+        <p><strong>Luz:</strong> <span id="luz">Cargando...</span></p>
+        <p><strong>Humedad del Suelo:</strong> <span id="humedad_suelo">Cargando...</span></p>
+        <p><strong>Temperatura:</strong> <span id="temperatura">Cargando...</span></p>
+        <p><strong>Humedad:</strong> <span id="humedad">Cargando...</span></p>
+        <p><strong>Estado del Motor:</strong> <span id="estado_motor">Cargando...</span></p>
+        <p><strong>Fecha y Hora:</strong> <span id="fecha_hora">Cargando...</span></p>
+    </div>
+</body>
 </html>
